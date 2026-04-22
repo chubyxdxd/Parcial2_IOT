@@ -1,7 +1,7 @@
 # Parcial2_IOT
 repo del particial 2 IOT
 
-# Sistema Mecatrónico IoT: Telemetría y Edge AI en Cascada
+# Sistema Mecatrónico IoT: Telemetría y Edge AI.
 
 Este repositorio contiene el código fuente de un Sistema Distribuido de Internet de las Cosas (IoT) diseñado para la adquisición de datos de sensores en tiempo real y la clasificación de imágenes mediante Inteligencia Artificial en el borde (Edge AI). 
 
@@ -30,14 +30,11 @@ Nodo sensorial de bajo consumo para la captura de datos físicos.
 * **Función:** Levanta un micro-servidor web que, al recibir una petición, lee los sensores físicos y devuelve un objeto JSON empaquetado con las variables cinemáticas y climáticas al Centro de Control.
 
 ### Nodo 2: Inferencia Edge AI (Raspberry Pi 5)
-Nodo de procesamiento intensivo dedicado a la visión artificial descentralizada.
+Nodo de procesamiento dedicado a la ejecución de modelos de visión artificial en el borde.
 * **Tecnología:** Raspberry Pi 5, PyTorch, OpenCV (`cv2`), Flask, Torchvision.
-* **Arquitectura de IA:** Utiliza una Inferencia en Cascada basada en redes neuronales residuales (`ResNet18`):
-  1. **Detector de Presencia (Modelo 1):** Clasificación binaria rápida para determinar si existe un objeto frente a la cámara, optimizando el uso de recursos.
-  2. **Clasificador de Materiales (Modelo 2):** Si se detecta un objeto, se activa una segunda red para clasificarlo en 5 categorías (biological, paper, glass, plastics, metal).
-* **Hardware:** Cámara USB (Configurada con `cv2.CAP_V4L2` y buffer minimizado para reducir la latencia).
-* **Función:** Funciona como un servidor web Flask en modo Headless. Captura un frame de video, ejecuta la inferencia matricial en cascada, comprime la fotografía resultante en Base64 y responde con un JSON que incluye la clasificación final, la precisión (accuracy) y la evidencia visual.
-
+* **Arquitectura de IA:** Implementa un modelo de clasificación basado en una red neuronal residual (`ResNet18`) entrenada para identificar 5 categorías de materiales (biological, paper, glass, plastics, metal).
+* **Hardware:** Cámara USB configurada mediante el backend `cv2.CAP_V4L2` con buffer minimizado para garantizar una captura de imagen con latencia reducida.
+* **Función:** Opera como un servidor web Flask en modo Headless. Al recibir una petición, captura un frame de video, ejecuta la inferencia matricial mediante PyTorch, comprime la imagen en formato Base64 y responde con un objeto JSON que contiene la clase detectada, el nivel de precisión (accuracy) y la evidencia visual.
 ---
 
 ## Flujo de Operación
